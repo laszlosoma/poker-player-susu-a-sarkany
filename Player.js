@@ -8,7 +8,6 @@ class Player {
 
   static betRequest(gameState, bet) {
     const game = new GameState(gameState);
-    bet(game.me().stack());
 
     const round = game.bettingRound();
 
@@ -28,11 +27,62 @@ class Player {
 
     const cards = game.me().holeCards().concat(game.communityCards());
 
-    const ranks = cards.map((c) => c.rank());
+    const values = cards.map((c) => c.value()).sort((a, b) => b - a);
 
-    const pair = ranks.find((r) => ranks.filter((rr) => rr === r).length === 2);
+    const pair = values.find(
+      (r) => values.filter((rr) => rr === r).length === 2
+    );
 
-    return !!pair;
+    return pair;
+  }
+
+  static has2Pair(gameState) {
+    const game = new GameState(gameState);
+
+    const cards = game.me().holeCards().concat(game.communityCards());
+
+    const values = cards.map((c) => c.value()).sort((a, b) => b - a);
+
+    // const pairs = values.filter(
+    //   (r) => values.filter((rr) => rr === r).length === 2
+    // );
+
+    const pairs = values.reduce((acc, curr, array) => {
+      if (array.filter((rr) => rr === curr).length === 2) {
+        acc.push(curr);
+      }
+      return acc;
+    }, []);
+
+    return pair;
+  }
+
+  static hasDrill(gameState) {
+    const game = new GameState(gameState);
+
+    const cards = game.me().holeCards().concat(game.communityCards());
+
+    const values = cards.map((c) => c.value()).sort((a, b) => b - a);
+
+    const pair = values.find(
+      (r) => values.filter((rr) => rr === r).length === 3
+    );
+
+    return pair;
+  }
+
+  static hasPoker(gameState) {
+    const game = new GameState(gameState);
+
+    const cards = game.me().holeCards().concat(game.communityCards());
+
+    const values = cards.map((c) => c.value()).sort((a, b) => b - a);
+
+    const pair = values.find(
+      (r) => values.filter((rr) => rr === r).length === 4
+    );
+
+    return pair;
   }
 
   static showdown(gameState) {}
