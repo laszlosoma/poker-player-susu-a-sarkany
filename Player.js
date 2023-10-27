@@ -6,6 +6,8 @@ class Player {
   }
 
   static betRequest(gameState, bet) {
+    return;
+
     const game = new GameState(gameState);
 
     if (game.me().hasPocketPair()) {
