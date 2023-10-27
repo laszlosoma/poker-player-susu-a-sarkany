@@ -11,8 +11,6 @@
     "express": "4.x"
   },
   "scripts": {
-    "dev": "",
-    "build": "tsc",
     "test": "jest"
   },
   "devDependencies": {
