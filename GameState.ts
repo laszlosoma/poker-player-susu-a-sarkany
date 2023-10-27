@@ -52,26 +52,31 @@ type Suit = "spades" | "hearts" | "clubs" | "diamonds";
 // 5	A7s, A6s, A5s, A4s, A3s, A2s, KQs, KQ
 // 6	QJs, JTs, T9s, 98s, 87s, 76s, 65s	Suited Connectors
 
+export const shouldEnterSuited = (card1: Card, card2: Card): boolean => {
+  const biggerCard = card1.rank > card2.rank ? card1 : card2;
+  const smallerCard = card1.rank > card2.rank ? card2 : card1;
+
+  if (biggerCard.rank === "A") {
+    if ([]) {
+      return true;
+    }
+  }
+};
+
+export const shouldEnterNonSuited = (card1: Card, card2: Card): boolean => {
+  return false;
+};
+
 export const shouldEnterGame = (card1: Card, card2: Card): boolean => {
   if (card1.rank === card2.rank) {
     return true;
   }
 
-  if (card1.rank === "A" || card2.rank === "A") {
-    return true;
-  }
-
-  if (card1.rank === "K" || card2.rank === "K") {
-    return true;
-  }
-
-  if (card1.rank === "Q" || card2.rank === "Q") {
-    return true;
-  }
-
-  if (card1.rank === "J" || card2.rank === "J") {
-    return true;
-  }
-
   return false;
+
+  if (card1.suit === card2.suit) {
+    return shouldEnterSuited(card1, card2);
+  }
+
+  return shouldEnterNonSuited(card1, card2);
 };
