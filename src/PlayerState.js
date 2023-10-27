@@ -74,6 +74,10 @@ class PlayerState {
 
     return Math.ceil(score);
   }
+
+  getHandValue(tableCards) {
+    const allCards = this.holeCards().concat(tableCards);
+  }
 }
 
 module.exports = PlayerState;
