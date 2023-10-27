@@ -7,7 +7,6 @@ class Player {
   }
 
   static betRequest(gameState, bet) {
-    return;
     const game = new GameState(gameState);
 
     const round = game.bettingRound();
